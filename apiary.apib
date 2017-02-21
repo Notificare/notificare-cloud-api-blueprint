@@ -15,79 +15,79 @@ For more information about this API, please [contact us](http://notifica.re/cont
 
 + Response 200 (application/json)
 
-        {
-        	"application": {
-        		"_id": "xxx",
-        		"name": "Notificare App",
-        		"category": "Business",
-        		"appStoreId": null,
-        		"androidPackageName": null,
-        		"services": {
-        			"richPush": true,
-        			"locationServices": true,
-        			"apns": true,
-        			"gcm": true,
-        			"websockets": true,
-        			"triggers": true,
-        			"passbook": true,
-        			"inAppPurchase": true,
-        			"oauth2": true,
-        			"screens": true,
-        			"reports": true,
-        			"appsOnDemand": true,
-        			"liveApi": true,
-        			"automation": true,
-        			"websitePush": true,
-        			"inbox": true,
-        			"storage": true
-        		},
-        		"inboxConfig": {
-        			"useInbox": true,
-        			"autoBadge": true
-        		},
-        		"userDataFields": [],
-        		"actionCategories": [],
-        		"regionConfig": {
-        			"proximityUUID": null
-        		},
-        		"websitePushConfig": {
-        			"icon": "/website-push/xxx/xxx",
-        			"allowedDomains": ["http://mydomain.com"],
-        			"urlFormatString": "http://mydomain.com/?notification=%@",
-        			"info": {
-        				"subject": {
-        					"C": "US",
-        					"O": "Notificare B.V.",
-        					"OU": "xxxx",
-        					"CN": "Website Push ID: web.com.mydomain",
-        					"UID": "web.com.mydomain"
-        				}
-        			}
-        		}
-        	}
+    {
+        "application": {
+            "_id": "xxx",
+            "name": "Notificare App",
+            "category": "Business",
+            "appStoreId": null,
+            "androidPackageName": null,
+            "services": {
+                "richPush": true,
+                "locationServices": true,
+                "apns": true,
+                "gcm": true,
+                "websockets": true,
+                "triggers": true,
+                "passbook": true,
+                "inAppPurchase": true,
+                "oauth2": true,
+                "screens": true,
+                "reports": true,
+                "appsOnDemand": true,
+                "liveApi": true,
+                "automation": true,
+                "websitePush": true,
+                "inbox": true,
+                "storage": true
+            },
+            "inboxConfig": {
+                "useInbox": true,
+                "autoBadge": true
+            },
+            "userDataFields": [],
+            "actionCategories": [],
+            "regionConfig": {
+                "proximityUUID": null
+            },
+            "websitePushConfig": {
+                "icon": "/website-push/xxx/xxx",
+                "allowedDomains": ["http://mydomain.com"],
+                "urlFormatString": "http://mydomain.com/?notification=%@",
+                "info": {
+                    "subject": {
+                        "C": "US",
+                        "O": "Notificare B.V.",
+                        "OU": "xxxx",
+                        "CN": "Website Push ID: web.com.mydomain",
+                        "UID": "web.com.mydomain"
+                    }
+                }
+            }
         }
+    }
 
 
-## Application [/assets/forgroup/{name}]
+## Asset Groups [/assets/forgroup/{name}]
 
 ### Retrieve a group of assets by name [GET]
 
 + Response 200 (application/json)
 
         {
-        	"assets": [{
-        		"title": "My Asset Group",
-        		"key": "xxx/xxx",
-        		"description": "",
-        		"_id": "xxx",
-        		"button": {
-        			"label": null,
-        			"action": null
-        		},
-        		"metaData": {
-        			"contentLength": 501,
-        			"contentType": "application/json",
-        			"originalFileName": "myjsonfile.json"
-        		}
-        	}]
+            "assets": [{
+                "title": "My Asset Group",
+                "key": "xxx/xxx",
+                "description": "",
+                "_id": "xxx",
+                "button": {
+                    "label": null,
+                    "action": null
+                },
+                "metaData": {
+                    "contentLength": 501,
+                    "contentType": "application/json",
+                    "originalFileName": "myjsonfile.json"
+                }
+            }]
         }
