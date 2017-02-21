@@ -8,8 +8,10 @@ Use Basic HTTP Authentication where `applicationKey` should be your username and
 
 To activate or get more information about this API, please [contact us](http://notifica.re/contact).
 
+# Group Application
+All methods to handle application related operations.
 
-## Application [/application/info]
+## Get Application Information [/application/info]
 
 ### Retrieve information about the application [GET]
 
@@ -67,8 +69,10 @@ To activate or get more information about this API, please [contact us](http://n
         }
     }
 
+# Group Asset
+All methods to handle asset groups related operations.
 
-## Assets [/asset/forgroup/{name}]
+## Get Asset Group [/asset/forgroup/{name}]
 ### Retrieve a group of assets by name [GET]
 
 + Parameters
@@ -96,7 +100,10 @@ To activate or get more information about this API, please [contact us](http://n
             }]
         }
 
-## Beacons [/beacon/forregion/{region}]
+# Group Beacon
+All methods to handle beacon related operations.
+
+## Get Beacons For Region [/beacon/forregion/{region}]
 ### Get all beacons for a certain region [GET]
 
 + Parameters
@@ -124,7 +131,7 @@ To activate or get more information about this API, please [contact us](http://n
                                    "proximity": "immediate"
         }]
 
-## Beacon [/beacon/forregion/{region}/{minor}]
+## Get a Beacon [/beacon/forregion/{region}/{minor}]
 ### Get all beacons for a certain region [GET]
 
 + Parameters
@@ -146,7 +153,10 @@ To activate or get more information about this API, please [contact us](http://n
                 }
         }
 
-## Device Registration [/device]
+# Group Device
+All methods to handle device related operations.
+
+## Register a Device [/device]
 ### Register a device [POST]
 
 + Parameters
@@ -190,7 +200,7 @@ To activate or get more information about this API, please [contact us](http://n
             }
         }
 
-## Device Tags [/device/{deviceID}/tags]
+## Get Device Tags [/device/{deviceID}/tags]
 ### Get all the tags for a device [GET]
 
 + Parameters
@@ -206,7 +216,10 @@ To activate or get more information about this API, please [contact us](http://n
                 ]
         }
 
-## Event [/event]
+# Group Event
+All methods to handle event related operations.
+
+## Register an Event [/event]
 ### Register an event [POST]
 
 ## Event Types:
@@ -255,4 +268,417 @@ To activate or get more information about this API, please [contact us](http://n
 
         {
 
+        }
+
+# Group Notification
+All methods to handle notification related operations.
+
+## Get a Notification [/notification/{id}]
+### Get a specific notification [GET]
+
++ Parameters
+
+    + id (required, string, `1627576d6d6d66d676627`)...The notification's unique identifier.
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "notification": {
+                                "id": "566acc80cbe343d7136ec9bf",
+                                "application": "5489b42ff23e5815132b492a",
+                                "account": "548985629f634350713ec9ee",
+                                "user_id": null,
+                                "device_id": null,
+                                "ttl": null,
+                                "message": "Ready for beers?",
+                                "sound": "default",
+                                "badge": null,
+                                "action_category": null,
+                                "__v": 0,
+                                "actions": [{
+                                    "type": "re.notifica.action.Callback",
+                                    "label": "yes",
+                                    "target": "",
+                                    "id": "566acc80cbe343d7136ec9c1",
+                                    "rules": [],
+                                    "camera": false,
+                                    "keyboard": false
+                                }, {
+                                    "type": "re.notifica.action.Callback",
+                                    "label": "no",
+                                    "target": "",
+                                    "id": "566acc80cbe343d7136ec9c0",
+                                    "rules": [],
+                                    "camera": false,
+                                    "keyboard": false
+                                }],
+                                "rules": [],
+                                "attachments": [],
+                                "location": {
+                                    "type": "Point",
+                                    "coordinates": [4.422683699999993, 51.91263190000001],
+                                    "distance": 0.6928425313346089
+                                },
+                                "content": [],
+                                "scheduled": false,
+                                "triggered": false,
+                                "archived": false,
+                                "cleared": false,
+                                "show_in_list": true,
+                                "scope": "application",
+                                "type": "re.notifica.notification.Alert",
+                                "time": "2015-12-11T13:15:44.298Z",
+                                "tags": [],
+                                "segments": [],
+                            }
+        }
+
+# Group Pass
+All methods to handle pass related operations.
+
+
+## Get a Pass By Serial [/pass/forserial/{serial}]
+
+### Get a pass with a specific serial [GET]
+Get a pass with a specific serial
+
+
++ Parameters
+
+    + serial = `100` (required, string, `402ab90b-65b5-4b4f-91fa-9823b2972f85`)...The pass serial number.
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+             "pass": {
+                               "_id":"5501894253058ca5269a9928",
+                               "application":"5354f0bb3fa544452ff4c7c0",
+                               "passbook":"54e135049c2cad772e7c0de0",
+                               "serial":"402ab90b-65b5-4b4f-91fa-9823b2972f85",
+                               "data":{
+                                        "backgroundColor":"rgb(0,0,0)",
+                                        "foregroundColor":"rgb(255,255,255)",
+                                        "suppressStripShine":false,
+                                        "labelColor":"rgb(255,255,255)",
+                                        "logoText":"My Company",
+                                        "description":"coupon example",
+                                        "auxiliaryFields":[],
+                                        "headerFields":[],
+                                        "primaryFields":[
+                                                          {
+                                                             "string":true,
+                                                             "key":"discount",
+                                                             "label":"discount",
+                                                             "textAlignment": "PKTextAlignmentLeft",
+                                                             "value": "20% off"
+                                                           }
+                                                          ],
+                                        "secondaryFields":[
+                                                            {
+                                                              "string":true,
+                                                              "key":"expires",
+                                                              "label":"expires",
+                                                              "textAlignment":"PKTextAlignmentLeft",
+                                                              "value":"31-12-2015"
+                                                            }
+                                                          ],
+                                        "backFields":[],
+                                        "transitType":null,
+                                        "barcode":{
+                                                     "format":"PKBarcodeFormatQR",
+                                                     "messageEncoding":"iso-8859-1"
+                                                  },
+                                        "background":null,
+                                        "thumbnail":null,
+                                        "logo":"https://s3-eu-west-1.amazonaws.com/notificare-storage/passbook/3d99d18148e6f3dbcf4ff891c9a026463b0311feccc7b9d0c8c79fee9b4dde19/7e6166684680598ff63894fbc837db244a1d98ea02793b414845a23f876f31ef",
+                                        "icon":"https://s3-eu-west-1.amazonaws.com/notificare-storage/passbook/3d99d18148e6f3dbcf4ff891c9a026463b0311feccc7b9d0c8c79fee9b4dde19/aa2a7d561c6ba9f99f169a38a92dc0ac98d5f5a6cec0b4bea447e62e70e0ea96",
+                                        "strip":"https://s3-eu-west-1.amazonaws.com/notificare-storage/passbook/3d99d18148e6f3dbcf4ff891c9a026463b0311feccc7b9d0c8c79fee9b4dde19/827a04cf2e5f8653f544432a72fc217409c57af0f0068fd0696f374e183e6b14",
+                                        "footer":null
+
+                               }
+                             }
+        }
+
+
+
+
+## Create a Pass [/pass]
+
+### Create a new pass [POST]
+Create a new pass.
+
++ Request (application/json)
+
+        {
+             "_id":"5501894253058ca5269a9928",
+             "application":"5354f0bb3fa544452ff4c7c0",
+             "passbook":"54e135049c2cad772e7c0de0",
+             "serial":"402ab90b-65b5-4b4f-91fa-9823b2972f85",
+             "data":{
+                       "backgroundColor":"rgb(0,0,0)",
+                       "foregroundColor":"rgb(255,255,255)",
+                       "suppressStripShine":false,
+                       "labelColor":"rgb(255,255,255)",
+                       "logoText":"lebkov",
+                       "description":"coupon example",
+                       "auxiliaryFields":[],
+                       "headerFields":[],
+                       "primaryFields":[
+                                         {
+                                            "string":true,
+                                            "key":"discount",
+                                            "label":"discount",
+                                            "textAlignment": "PKTextAlignmentLeft",
+                                            "value": "20% off"
+                                         }
+                                       ],
+                       "secondaryFields":[
+                                           {
+                                              "string":true,
+                                              "key":"expires",
+                                              "label":"expires",
+                                              "textAlignment":"PKTextAlignmentLeft",
+                                              "value": "31-12-2015"
+                                           }
+                                         ],
+                       "backFields":[],
+                       "transitType":null,
+                       "barcode":{
+                                   "format":"PKBarcodeFormatQR",
+                                   "messageEncoding":"iso-8859-1"
+                                 },
+                       "background":null,
+                       "thumbnail":null,
+                       "logo":"https://s3-eu-west-1.amazonaws.com/notificare-storage/passbook/3d99d18148e6f3dbcf4ff891c9a026463b0311feccc7b9d0c8c79fee9b4dde19/7e6166684680598ff63894fbc837db244a1d98ea02793b414845a23f876f31ef",
+                       "icon":"https://s3-eu-west-1.amazonaws.com/notificare-storage/passbook/3d99d18148e6f3dbcf4ff891c9a026463b0311feccc7b9d0c8c79fee9b4dde19/aa2a7d561c6ba9f99f169a38a92dc0ac98d5f5a6cec0b4bea447e62e70e0ea96",
+                       "strip":"https://s3-eu-west-1.amazonaws.com/notificare-storage/passbook/3d99d18148e6f3dbcf4ff891c9a026463b0311feccc7b9d0c8c79fee9b4dde19/827a04cf2e5f8653f544432a72fc217409c57af0f0068fd0696f374e183e6b14",
+                       "footer":null
+             }
+        }
+
+
++ Response 201 (application/json; charset=utf-8)
+
+        {
+                "pass":{
+                                  "_id":"5245bc5b3e66a3b01f0024d4"
+                         }
+        }
+
+# Group Passbook
+All methods to handle passbook templates related operations.
+
+## Get All Templates [/passbook{?limit,skip}]
+
+### Get all passbook templates for an application [GET]
+Get all passbook templates for an application.
+
+
++ Parameters
+
+    + limit = `100` (optional, number, `10`)...The maximum number of results to retrieve.
+
+    + skip = `0` (optional, number, `0`)...The number of results to skip
+
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+             "passbooks":[
+                             {
+                               "_id":"5501894253058ca5269a9928",
+                               "application":"5354f0bb3fa544452ff4c7c0",
+                               "passStyle":"coupon",
+                               "data":{
+                                        "backgroundColor":"rgb(0,0,0)",
+                                        "foregroundColor":"rgb(255,255,255)",
+                                        "suppressStripShine":false,
+                                        "labelColor":"rgb(255,255,255)",
+                                        "logoText":"lebkov",
+                                        "description":"coupon example",
+                                        "auxiliaryFields":[],
+                                        "headerFields":[],
+                                        "primaryFields":[
+                                                          {
+                                                             "string":true,
+                                                             "key":"discount",
+                                                             "label":"discount",
+                                                             "textAlignment":
+                                                             "PKTextAlignmentLeft"
+                                                           }
+                                                          ],
+                                        "secondaryFields":[
+                                                            {
+                                                              "string":true,
+                                                              "key":"expires",
+                                                              "label":"expires",
+                                                              "textAlignment":"PKTextAlignmentLeft"
+                                                            }
+                                                          ],
+                                        "backFields":[],
+                                        "transitType":null,
+                                        "barcode":{
+                                                     "format":"PKBarcodeFormatQR",
+                                                     "messageEncoding":"iso-8859-1"
+                                                  },
+                                        "background":null,
+                                        "thumbnail":null,
+                                        "logo":"https://s3-eu-west-1.amazonaws.com/notificare-storage/passbook/3d99d18148e6f3dbcf4ff891c9a026463b0311feccc7b9d0c8c79fee9b4dde19/7e6166684680598ff63894fbc837db244a1d98ea02793b414845a23f876f31ef",
+                                        "icon":"https://s3-eu-west-1.amazonaws.com/notificare-storage/passbook/3d99d18148e6f3dbcf4ff891c9a026463b0311feccc7b9d0c8c79fee9b4dde19/aa2a7d561c6ba9f99f169a38a92dc0ac98d5f5a6cec0b4bea447e62e70e0ea96",
+                                        "strip":"https://s3-eu-west-1.amazonaws.com/notificare-storage/passbook/3d99d18148e6f3dbcf4ff891c9a026463b0311feccc7b9d0c8c79fee9b4dde19/827a04cf2e5f8653f544432a72fc217409c57af0f0068fd0696f374e183e6b14",
+                                        "footer":null
+
+                               },
+                               "name":"coupon example",
+                               "__v":0,
+                               "active":false
+                             }
+                          ],
+                          "count":2
+        }
+
+# Group Region
+All methods to handle region related operations.
+
+
+## Get All Regions [/region{?limit,skip}]
+
+### Get all regions for an application [GET]
+Get all regions for an application.
+
+
++ Parameters
+
+    + limit = `100` (optional, number, `10`)...The maximum number of results to retrieve.
+
+    + skip = `0` (optional, number, `0`)...The number of results to skip
+
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+                "regions":[
+                            {
+                                  "_id":"5245bc5b3e66a3b01f0024d4",
+                                  "name": "My Region",
+                                  "geometry": {
+                                               "type": "Point",
+                                               "coordinates": [4.2345,5.6789]
+                                  },
+                                  "major": "123456",
+                                  "timezone": "Europe/Amsterdam"
+                            }
+                ]
+        }
+
+# Group Reply
+All methods to handle replies related operations.
+
+
+## Register a Reply [/reply]
+
+### Register a reply [POST]
+Register a reply for a notification.
+
+
++ Parameters
+
+    + notification (required, string, `123eee456ddd789dddd0`)...The unique identifier of a notification.
+    + label (required, string, `Yes`)...The label of the action which executed the reply.
+    + deviceID (required, string, `APA91bEpai_9PbfvVie3xvVnM2VXZEjQ1ZZIFiRzXf`)...The unique identifier for your device corresponding to the APNS, FCM or Webpush token.
+    + userID (optional, string, `1234567890`)...The unique identifier that you can use to send messages to this device.
+    + data (optional, object, `{"message": "some text provided by the user"}`)...Arbitrary data to be stored for this reply. Currently our platform can handle `message` (text provided by the user) and `media` (URL of a media file uploaded to Notificare)
+
+
++ Request (application/json)
+
+        {
+            "notification": "xxx",
+            "label": "Yes",
+            "deviceID": "xxx",
+            "userID": null,
+        }
+
++ Response 202 (application/json; charset=utf-8)
+
+        {
+
+        }
+
+# Group Status
+Check the status of this API.
+
+
+## Get Status [/status]
+
+### Get the status of this API [GET]
+Get the status of this API.
+
+
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+                "status": "ok"
+        }
+
+# Group Trigger
+All methods to handle trigger related operations.
+
+
+## Register a Trigger [/trigger/{type}]
+
+### Register a trigger [POST]
+Register a trigger for a region.
+
+
++ Parameters
+
+    + trigger (required, string, `re.notifica.trigger.region.Enter`)...The type of trigger being executed.
+    + region (required, string, `123eee456ddd789dddd0`)...The unique identifier of a region.
+    + deviceID (required, string, `APA91bEpai_9PbfvVie3xvVnM2VXZEjQ1ZZIFiRzXf`)...The unique identifier for your device corresponding to the APNS, FCM or Webpush token.
+
++ Request (application/json)
+
+        {
+            "region": "xxx",
+            "deviceID": "xxx"
+        }
+
++ Response 201 (application/json; charset=utf-8)
+
+        {
+           "triggers": {
+                         "id": "123eee456ddd789dddd0"
+           }
+        }
+
+# Group Upload
+All methods to handle upload related operations.
+
+## Upload a File [/upload/{type}]
+
+### Upload a file [POST]
+Upload a file to Notificare. The resulting filename is a path inside the notificare storage. This can be used as a reference to the file in further processing or deleting.
+The contents of the file should be in the body of the request and with the correct mime-type. So, e.g. an import should be of type `text/csv`, an image to go with a notification `image/png`, etc.
+
+### Upload Types
+***
+notification
+***
+import
+***
+
++ Parameters
+
+    + type (required, string, `import`)...The type of the file to upload
+
++ Request (text/csv)
+    userID,userName
+    "test@example.com","Test User"
+
++ Response 201 (application/json; charset=utf-8)
+
+        {
+                "filename": "/imports/9f.."
         }
