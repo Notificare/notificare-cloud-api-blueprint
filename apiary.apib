@@ -1,80 +1,93 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://cloud.notifica.re/api
 
-# Notificare Cloud API
+# Notificare CLOUD API
+This is an official Notificare API that enables access to certain functionality of our platform to mobile and web apps. Its sole purpose is to provide apps access to REST API endpoints without having to build your own back-end connection to our standard REST API.
+The API calls below are all authenticated with `applicationKey` and `applicationSecret`, if you do not have these yet, you should grab them from your app in Notificare Dashboard under the section Settings > App Keys.
+Use Basic HTTP Authentication where `applicationKey` should be your username and `applicationSecret` your password. If you intend to use this API from your mobile application, you can access all the endpoints provided here through the Cloud API method available in our SDKs.
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+For more information about this API, please [contact us](http://notifica.re/contact).
 
-## Questions Collection [/questions]
 
-### List All Questions [GET]
+## Application [/application/info]
+
+### Retrieve information about the application [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
-
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+        	"application": {
+        		"_id": "xxx",
+        		"name": "Notificare App",
+        		"category": "Business",
+        		"appStoreId": null,
+        		"androidPackageName": null,
+        		"services": {
+        			"richPush": true,
+        			"locationServices": true,
+        			"apns": true,
+        			"gcm": true,
+        			"websockets": true,
+        			"triggers": true,
+        			"passbook": true,
+        			"inAppPurchase": true,
+        			"oauth2": true,
+        			"screens": true,
+        			"reports": true,
+        			"appsOnDemand": true,
+        			"liveApi": true,
+        			"automation": true,
+        			"websitePush": true,
+        			"inbox": true,
+        			"storage": true
+        		},
+        		"inboxConfig": {
+        			"useInbox": true,
+        			"autoBadge": true
+        		},
+        		"userDataFields": [],
+        		"actionCategories": [],
+        		"regionConfig": {
+        			"proximityUUID": null
+        		},
+        		"websitePushConfig": {
+        			"icon": "/website-push/xxx/xxx",
+        			"allowedDomains": ["http://mydomain.com"],
+        			"urlFormatString": "http://mydomain.com/?notification=%@",
+        			"info": {
+        				"subject": {
+        					"C": "US",
+        					"O": "Notificare B.V.",
+        					"OU": "xxxx",
+        					"CN": "Website Push ID: web.com.mydomain",
+        					"UID": "web.com.mydomain"
+        				}
+        			}
+        		}
+        	}
         }
 
-+ Response 201 (application/json)
 
-    + Headers
+## Application [/assets/forgroup/{name}]
 
-            Location: /questions/2
+### Retrieve a group of assets by name [GET]
 
-    + Body
++ Response 200 (application/json)
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+        {
+        	"assets": [{
+        		"title": "My Asset Group",
+        		"key": "xxx/xxx",
+        		"description": "",
+        		"_id": "xxx",
+        		"button": {
+        			"label": null,
+        			"action": null
+        		},
+        		"metaData": {
+        			"contentLength": 501,
+        			"contentType": "application/json",
+        			"originalFileName": "myjsonfile.json"
+        		}
+        	}]
+        }
