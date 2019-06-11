@@ -2,17 +2,16 @@ FORMAT: 1A
 HOST: https://cloud.notifica.re/api
 
 # Notificare CLOUD API
-This is an official Notificare API that enables access to certain features of our platform specially for your mobile and web apps. Its sole purpose is to provide access to REST API endpoints without having to build an integration through your own back-end and instead use it from a front-end application.
+This is an official Notificare API that enables access to certain features of our platform specially designed for your mobile and web front-end apps. Its sole purpose is to provide access to strategic endpoints via a front-end application.
 The API endpoints below are all authenticated with `applicationKey` and `applicationSecret`, if you do not have these yet, you should grab them from your app in Notificare Dashboard under the section Settings > App Keys.
 Use Basic HTTP Authentication where `applicationKey` should be your username and `applicationSecret` your password. If you intend to use this API from your mobile application, you can access all the endpoints provided here through the Cloud API method available in our SDKs.
 
-To activate or get more information about this API, please [contact us](http://notifica.re/contact).
+This API requires activations before you can use it. To activate or get more information about this API, please [contact us](http://notifica.re/contact).
 
 # Group Application
 All methods to handle application related operations.
 
-## Get Application Information [/application/info]
-
+## Application [/application/info]
 ### Retrieve information about the application [GET]
 
 + Response 200 (application/json)
@@ -72,7 +71,7 @@ All methods to handle application related operations.
 # Group Asset
 All methods to handle asset groups related operations.
 
-## Get Asset Group [/asset/forgroup/{name}]
+## Asset Groups [/asset/forgroup/{name}]
 ### Retrieve a group of assets by name [GET]
 
 + Parameters
@@ -103,7 +102,7 @@ All methods to handle asset groups related operations.
 # Group Beacon
 All methods to handle beacon related operations.
 
-## Get Beacons For Region [/beacon/forregion/{region}]
+## Beacons For Region [/beacon/forregion/{region}]
 ### Get all beacons for a certain region [GET]
 
 + Parameters
@@ -131,8 +130,8 @@ All methods to handle beacon related operations.
                                    "proximity": "immediate"
         }]
 
-## Get a Beacon [/beacon/forregion/{region}/{minor}]
-### Get all beacons for a certain region [GET]
+## Beacon [/beacon/forregion/{region}/{minor}]
+### Get a beacon by its region and minor [GET]
 
 + Parameters
 
@@ -156,7 +155,7 @@ All methods to handle beacon related operations.
 # Group Device
 All methods to handle device related operations.
 
-## Register a Device [/device]
+## New Device [/device]
 ### Register a device [POST]
 
 + Parameters
@@ -200,8 +199,8 @@ All methods to handle device related operations.
             }
         }
 
-## Update a Device [/device/{deviceID}]
-### Update a device [PUT]
+## Update Device [/device/{deviceID}]
+### Update an existing device [PUT]
 
 + Parameters
 
@@ -245,7 +244,7 @@ All methods to handle device related operations.
         }
 
 
-### Delete a device [DELETE]
+### Delete an existing device [DELETE]
 
 + Parameters
 
@@ -483,7 +482,7 @@ All methods to handle device related operations.
 # Group Event
 All methods to handle event related operations.
 
-## Register an Event [/event]
+## New Event [/event]
 ### Register an event [POST]
 
 ## Event Types:
@@ -537,7 +536,7 @@ All methods to handle event related operations.
 # Group Notification
 All methods to handle notification related operations.
 
-## Get a Notification [/notification/{id}]
+## Notification [/notification/{id}]
 ### Get a specific notification [GET]
 
 + Parameters
@@ -548,17 +547,16 @@ All methods to handle notification related operations.
 
         {
             "notification": {
-                                "id": "566acc80cbe343d7136ec9bf",
+                                "_id": "566acc80cbe343d7136ec9bf",
                                 "application": "5489b42ff23e5815132b492a",
                                 "account": "548985629f634350713ec9ee",
-                                "user_id": null,
-                                "device_id": null,
+                                "userID": null,
+                                "deviceID": null,
                                 "ttl": null,
                                 "message": "Ready for beers?",
                                 "sound": "default",
                                 "badge": null,
                                 "action_category": null,
-                                "__v": 0,
                                 "actions": [{
                                     "type": "re.notifica.action.Callback",
                                     "label": "yes",
@@ -588,7 +586,7 @@ All methods to handle notification related operations.
                                 "triggered": false,
                                 "archived": false,
                                 "cleared": false,
-                                "show_in_list": true,
+                                "showInList": true,
                                 "scope": "application",
                                 "type": "re.notifica.notification.Alert",
                                 "time": "2015-12-11T13:15:44.298Z",
@@ -597,15 +595,70 @@ All methods to handle notification related operations.
                             }
         }
 
+
+## Inbox [/notification/inbox/fordevice/{deviceID}{?since,limit,skip}]
+### Get a specific device's inbox [GET]
+
++ Parameters
+
+    + deviceID (required, string, `APA91bEpai_9PbfvVie3xvVnM2VXZEjQ1ZZIFiRzXf`)...The unique identifier for your device.
+    + since (optional, date, `2015-12-11T13:15:44.298Z`)...A date that we will use to retrieve items. When provided we will only retrieve items since that date.
+    + limit = `100` (optional, number, `10`)...The maximum number of results to retrieve.
+    + skip = `0` (optional, number, `0`)...The number of results to skip.
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "inboxItems": [
+                            {
+                                "id": "566acc80cbe343d7136ec9bf",
+                                "notification": "566acc80cbe343d7136ec9bf",
+                                "title": null,
+                                "subtitle": null,
+                                "message": "Ready for beers?",
+                                "opened": false,
+                                "extra": null,
+                                "attachments": [],
+                                "time": "2015-12-11T13:15:44.298Z"
+                            }
+                          ],
+            "count": 1,
+            "unread"": 1
+        }
+
+### Clear all items in a specific device's inbox [DELETE]
+
++ Parameters
+
+    + deviceID (required, string, `APA91bEpai_9PbfvVie3xvVnM2VXZEjQ1ZZIFiRzXf`)...The unique identifier for your device.
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "message": "cleared inbox",
+            "count": 0
+        }
+
+## Delete Inbox Item [/notification/inbox/{id}]
+### Delete inbox item in a specific device's inbox [DELETE]
+
++ Parameters
+
+    + id (required, string, `566acc80cbe343d7136ec9bf`)...The unique identifier for the inbox item.
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "message": "inbox item removed"
+        }
+
 # Group Pass
 All methods to handle pass related operations.
 
 
-## Get a Pass By Serial [/pass/forserial/{serial}]
+## Pass By Serial [/pass/forserial/{serial}]
 
 ### Get a pass with a specific serial [GET]
-Get a pass with a specific serial
-
 
 + Parameters
 
@@ -666,10 +719,8 @@ Get a pass with a specific serial
 
 
 
-## Create a Pass [/pass]
-
+## New Pass [/pass]
 ### Create a new pass [POST]
-Create a new pass.
 
 + Request (application/json)
 
@@ -732,17 +783,14 @@ Create a new pass.
 # Group Passbook
 All methods to handle passbook templates related operations.
 
-## Get All Templates [/passbook{?limit,skip}]
-
-### Get all passbook templates for an application [GET]
-Get all passbook templates for an application.
+## Pass Templates [/passbook{?limit,skip}]
+### Get all pass templates for an application [GET]
 
 
 + Parameters
 
     + limit = `100` (optional, number, `10`)...The maximum number of results to retrieve.
-
-    + skip = `0` (optional, number, `0`)...The number of results to skip
+    + skip = `0` (optional, number, `0`)...The number of results to skip.
 
 
 + Response 200 (application/json; charset=utf-8)
@@ -805,11 +853,8 @@ Get all passbook templates for an application.
 All methods to handle region related operations.
 
 
-## Get All Regions [/region{?limit,skip}]
-
+## Regions [/region{?limit,skip}]
 ### Get all regions for an application [GET]
-Get all regions for an application.
-
 
 + Parameters
 
@@ -835,14 +880,13 @@ Get all regions for an application.
                 ]
         }
 
+
 # Group Reply
 All methods to handle replies related operations.
 
 
-## Register a Reply [/reply]
-
+## New Reply [/reply]
 ### Register a reply [POST]
-Register a reply for a notification.
 
 
 + Parameters
@@ -873,11 +917,8 @@ Register a reply for a notification.
 Check the status of this API.
 
 
-## Get Status [/status]
-
+## API Status [/status]
 ### Get the status of this API [GET]
-Get the status of this API.
-
 
 
 + Response 200 (application/json; charset=utf-8)
@@ -890,11 +931,8 @@ Get the status of this API.
 All methods to handle trigger related operations.
 
 
-## Register a Trigger [/trigger/{type}]
-
+## New Trigger [/trigger/{type}]
 ### Register a trigger [POST]
-Register a trigger for a region.
-
 
 + Parameters
 
@@ -920,8 +958,7 @@ Register a trigger for a region.
 # Group Upload
 All methods to handle upload related operations.
 
-## Upload a File [/upload/{type}]
-
+## New Upload [/upload/{type}]
 ### Upload a file [POST]
 Upload a file to Notificare. The resulting filename is a path inside the notificare storage. This can be used as a reference to the file in further processing or deleting.
 The contents of the file should be in the body of the request and with the correct mime-type. So, e.g. an import should be of type `text/csv`, an image to go with a notification `image/png`, etc.
